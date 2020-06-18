@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/scripts/ActionButton.gd" type="Script" id=2]
+
+[node name="Dialog" type="Polygon2D"]
+position = Vector2( 489.746, 132.344 )
+scale = Vector2( 0.382306, 0.463379 )
+color = Color( 0, 0, 0, 0 )
+texture_scale = Vector2( 0.878, 1 )
+polygon = PoolVector2Array( 224, 96, 223, 192, 543, 192, 543, 64, 224, 64 )
+script = ExtResource( 2 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_bottom = 0.5
+margin_right = 241.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 234.0
+margin_bottom = 103.0
+text = "fsaddsaf"
