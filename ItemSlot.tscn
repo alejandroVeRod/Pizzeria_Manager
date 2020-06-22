@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/scripts/ItemSlot.gd" type="Script" id=2]
+
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 256.0
+margin_bottom = 28.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="TextureRect" parent="."]
+margin_bottom = 28.0
+
+[node name="Panel_Name" type="PanelContainer" parent="."]
+margin_left = 4.0
+margin_right = 18.0
+margin_bottom = 28.0
+size_flags_vertical = 3
+
+[node name="Item_name" type="Label" parent="Panel_Name"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 7.0
+margin_bottom = 21.0
+
+[node name="Panel_Quantity" type="PanelContainer" parent="."]
+margin_left = 22.0
+margin_right = 36.0
+margin_bottom = 28.0
+
+[node name="Quantity" type="Label" parent="Panel_Quantity"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 7.0
+margin_bottom = 21.0

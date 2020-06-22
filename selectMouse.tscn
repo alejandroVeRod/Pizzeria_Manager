@@ -1,0 +1,613 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://resources/images/Flour.png" type="Texture" id=1]
+[ext_resource path="res://resources/images/jar water.png" type="Texture" id=2]
+[ext_resource path="res://resources/images/base room.png" type="Texture" id=3]
+[ext_resource path="res://resources/images/tableta.png" type="Texture" id=4]
+[ext_resource path="res://Dough_Unfermented.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/scripts/Inventory.gd" type="Script" id=6]
+[ext_resource path="res://resources/scripts/DoughTable.gd" type="Script" id=7]
+[ext_resource path="res://resources/images/yeast.png" type="Texture" id=8]
+[ext_resource path="res://resources/fonts/PIXELADE.TTF" type="DynamicFontData" id=9]
+[ext_resource path="res://resources/images/salt.png" type="Texture" id=10]
+[ext_resource path="res://ShowValueSlider.gd" type="Script" id=11]
+[ext_resource path="res://resources/scripts/Dialog_Dough_Preparation.gd" type="Script" id=12]
+[ext_resource path="res://Clock.gd" type="Script" id=13]
+[ext_resource path="res://resources/scripts/ProgressBar_on_timer.gd" type="Script" id=14]
+[ext_resource path="res://Draggable_Object.gd" type="Script" id=15]
+[ext_resource path="res://resources/shaders/outline.shader" type="Shader" id=16]
+[ext_resource path="res://resources/scripts/Outline.gd" type="Script" id=17]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/inventory border.png-8a999c85f5c40023228a501c6af209d7.stex"
+
+[sub_resource type="DynamicFont" id=2]
+size = 31
+extra_spacing_char = 4
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 10
+outline_size = 1
+outline_color = Color( 0.0941176, 0.0117647, 0.0117647, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://resources/fonts/PIXELADE.TTF"
+
+[sub_resource type="DynamicFont" id=7]
+size = 18
+font_data = SubResource( 6 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://resources/fonts/PIXELADE.TTF"
+
+[sub_resource type="DynamicFont" id=9]
+size = 15
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://resources/fonts/PIXELADE.TTF"
+
+[sub_resource type="DynamicFont" id=11]
+size = 12
+font_data = SubResource( 10 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 12
+font_data = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 16 )
+shader_param/outLineSize = 0.022
+shader_param/outLineColor = Plane( 0.5, 1, 0.5, 1 )
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends PopupMenu
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="DynamicFont" id=15]
+size = 19
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 300 )
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Inventory" type="Polygon2D" parent="."]
+visible = false
+color = Color( 0.356863, 0.0862745, 0.0862745, 0.905882 )
+polygon = PoolVector2Array( 64, 64, 416, 64, 416, 544, 64, 544 )
+script = ExtResource( 6 )
+
+[node name="Background" type="TextureRect" parent="Inventory"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 416.0
+margin_bottom = 544.0
+texture = SubResource( 1 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="PanelContainer" parent="Inventory"]
+margin_left = 96.0
+margin_top = 112.0
+margin_right = 384.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/Items"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 281.0
+margin_bottom = 393.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Inventory/Items/VBoxContainer"]
+margin_right = 274.0
+margin_bottom = 34.0
+
+[node name="Buy" type="Button" parent="Inventory/Items/VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 267.0
+margin_bottom = 27.0
+text = "Buy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="base room" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 488, 342 )
+scale = Vector2( 2.17773, 2.225 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.619608 )
+anchor_bottom = 1.0
+margin_top = 544.0
+margin_right = 1024.0
+margin_bottom = 599.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 48.0
+alignment = 2
+
+[node name="Clock" type="Node2D" parent="PanelContainer/HBoxContainer"]
+position = Vector2( 922, 0 )
+script = ExtResource( 13 )
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/Clock"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/Clock/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 81.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 2 )
+text = "06:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dough_Unfermented" parent="." instance=ExtResource( 5 )]
+margin_right = 0.0
+margin_bottom = 0.199982
+script = ExtResource( 15 )
+
+[node name="Dough_Table" type="Control" parent="."]
+margin_left = 204.0
+margin_top = 351.0
+margin_right = 318.0
+margin_bottom = 438.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Dough_Table"]
+visible = false
+margin_left = 339.698
+margin_top = 271.538
+margin_right = 429.698
+margin_bottom = 295.538
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Dough_Table/ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -322.93
+margin_top = -284.468
+margin_right = -322.93
+margin_bottom = -284.468
+theme = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dough_Table/ReferenceRect/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 83.0
+margin_bottom = 17.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+meta_underlined = false
+tab_size = 0
+text = "Click to prepare Dough"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AcceptDialog" type="AcceptDialog" parent="Dough_Table"]
+margin_left = 257.506
+margin_top = 174.563
+margin_right = 442.506
+margin_bottom = 486.563
+window_title = "Dough Preparation"
+resizable = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Dough_Table/AcceptDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 177.0
+margin_bottom = 276.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer"]
+margin_right = 169.0
+margin_bottom = 268.0
+
+[node name="HPizzaStyleContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_right = 169.0
+margin_bottom = 20.0
+
+[node name="Label2" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HPizzaStyleContainer"]
+margin_right = 59.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 7 )
+text = "Pizza style"
+align = 1
+
+[node name="OptionButton" type="OptionButton" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HPizzaStyleContainer"]
+margin_left = 63.0
+margin_right = 161.0
+margin_bottom = 20.0
+text = "Neapolitan"
+align = 2
+items = [ "Neapolitan", null, false, 0, null, "American", null, false, 1, null, "Sicilian", null, false, 2, null ]
+selected = 0
+
+[node name="HPizzaSizeContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 169.0
+margin_bottom = 44.0
+
+[node name="Label2" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HPizzaSizeContainer"]
+margin_right = 56.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 7 )
+text = "Pizza size"
+align = 1
+
+[node name="OptionButton" type="OptionButton" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HPizzaSizeContainer"]
+margin_left = 60.0
+margin_right = 124.0
+margin_bottom = 20.0
+text = "Small"
+align = 2
+items = [ "Small", null, false, 0, null, "Medium", null, false, 1, null, "Large", null, false, 2, null ]
+selected = 0
+
+[node name="HNumberPizzaContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 169.0
+margin_bottom = 72.0
+
+[node name="Label2" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HNumberPizzaContainer"]
+margin_top = 2.0
+margin_right = 101.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 7 )
+text = "Number of pizzas"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HNumberPizzaContainer"]
+margin_left = 105.0
+margin_right = 163.0
+margin_bottom = 24.0
+text = "1"
+align = 1
+max_length = 2
+
+[node name="HWaterContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 169.0
+margin_bottom = 108.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sprite" type="Sprite" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer/PanelContainer"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="PanelPercentage" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer"]
+margin_left = 36.0
+margin_right = 152.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer/PanelPercentage"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 109.0
+margin_bottom = 23.0
+min_value = 50.0
+max_value = 90.0
+step = 5.0
+value = 50.0
+ticks_on_borders = true
+script = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer"]
+margin_left = 156.0
+margin_top = 8.0
+margin_right = 156.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+
+[node name="LabelPercentage3" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HWaterContainer"]
+margin_left = 160.0
+margin_top = 8.0
+margin_right = 169.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+text = "%"
+
+[node name="Label" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 169.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 11 )
+text = "Ingredients needed:"
+
+[node name="HFlourContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 129.0
+margin_right = 169.0
+margin_bottom = 162.0
+
+[node name="PanelSprite" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HFlourContainer"]
+margin_right = 32.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sprite" type="Sprite" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HFlourContainer/PanelSprite"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="PanelQuantity" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HFlourContainer"]
+margin_left = 36.0
+margin_right = 158.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+
+[node name="LabelQuantity" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HFlourContainer/PanelQuantity"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 115.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 7 )
+text = "500"
+align = 1
+
+[node name="Label" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HFlourContainer"]
+margin_left = 162.0
+margin_top = 7.0
+margin_right = 169.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 7 )
+text = "g"
+align = 1
+
+[node name="HSaltContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 166.0
+margin_right = 169.0
+margin_bottom = 198.0
+
+[node name="PanelSprite" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HSaltContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sprite" type="Sprite" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HSaltContainer/PanelSprite"]
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PanelQuantity" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HSaltContainer"]
+margin_left = 36.0
+margin_right = 159.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+
+[node name="LabelQuantity" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HSaltContainer/PanelQuantity"]
+margin_left = 7.0
+margin_top = 8.0
+margin_right = 116.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+text = "23"
+align = 1
+
+[node name="label" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HSaltContainer"]
+margin_left = 163.0
+margin_top = 8.0
+margin_right = 169.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+text = "g"
+
+[node name="HYeastContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 202.0
+margin_right = 169.0
+margin_bottom = 234.0
+
+[node name="PanelSprite" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HYeastContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sprite" type="Sprite" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HYeastContainer/PanelSprite"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="PanelQuantity" type="PanelContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HYeastContainer"]
+margin_left = 36.0
+margin_right = 159.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+
+[node name="LabelQuantity" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HYeastContainer/PanelQuantity"]
+margin_left = 7.0
+margin_top = 8.0
+margin_right = 116.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+text = "3"
+align = 1
+
+[node name="LabelPercentage" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HYeastContainer"]
+margin_left = 163.0
+margin_top = 8.0
+margin_right = 169.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 9 )
+text = "g"
+
+[node name="Label2" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 238.0
+margin_right = 169.0
+margin_bottom = 251.0
+custom_fonts/font = SubResource( 11 )
+text = "Time needed"
+
+[node name="HTimeContainer" type="HBoxContainer" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer"]
+margin_top = 255.0
+margin_right = 169.0
+margin_bottom = 268.0
+alignment = 1
+
+[node name="LabelTimeNeeded" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HTimeContainer"]
+margin_left = 58.0
+margin_right = 74.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 11 )
+text = "423"
+align = 1
+
+[node name="LabelMinutes" type="Label" parent="Dough_Table/AcceptDialog/MarginContainer/VBoxContainer/HTimeContainer"]
+margin_left = 78.0
+margin_right = 111.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 11 )
+text = "minutes"
+align = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Dough_Table"]
+visible = false
+margin_left = 25.9997
+margin_top = -13.0002
+margin_right = 88.9997
+margin_bottom = 0.999756
+custom_fonts/font = SubResource( 12 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="OutlineSprite" type="Sprite" parent="Dough_Table"]
+material = SubResource( 13 )
+position = Vector2( 53.5696, 42.7702 )
+scale = Vector2( 1.67386, 1.65787 )
+texture = ExtResource( 4 )
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PopupMenu" type="PopupMenu" parent="Dough_Table"]
+margin_left = 33.0
+margin_top = -31.0
+margin_right = 154.0
+margin_bottom = 14.0
+script = SubResource( 14 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dough_Table/PopupMenu"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel_prepare" type="PanelContainer" parent="Dough_Table/PopupMenu/VBoxContainer"]
+visible = false
+margin_right = 118.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_prepare" type="Button" parent="Dough_Table/PopupMenu/VBoxContainer/Panel_prepare"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 111.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 15 )
+text = "Prepare Dough"
+
+[node name="Panel_cancel" type="PanelContainer" parent="Dough_Table/PopupMenu/VBoxContainer"]
+visible = false
+margin_top = 44.0
+margin_right = 118.0
+margin_bottom = 84.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_cancel" type="Button" parent="Dough_Table/PopupMenu/VBoxContainer/Panel_cancel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 111.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 15 )
+text = "Cancel Dough Preparation"
+
+[node name="DoughPosition" type="Node2D" parent="Dough_Table"]
+position = Vector2( 49.4001, 25.6501 )
+[connection signal="button_down" from="Inventory/Items/VBoxContainer/PanelContainer/Buy" to="Inventory" method="_on_Buy_button_down"]
