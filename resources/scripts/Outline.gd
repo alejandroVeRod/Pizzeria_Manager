@@ -1,5 +1,5 @@
-extends TextureRect
-var material_outline=load("res://resources/materials/dough_material.material")
+extends Sprite
+var material_outline=preload("res://resources/materials/outline.material")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -8,8 +8,9 @@ var material_outline=load("res://resources/materials/dough_material.material")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$".".material=null
-	$"../Control".connect("mouse_entered",self,"_on_Texture_mouse_entered")
-	$"../Control".connect("mouse_exited",self,"_on_Texture_mouse_exited")
+	get_parent().connect("mouse_entered",self,"on_mouse_select")
+	get_parent().connect("mouse_exited",self,"on_mouse_unselect")
+
 	pass # Replace with function body.
 
 
@@ -18,11 +19,13 @@ func _ready():
 #	pass
 
 
-func _on_Texture_mouse_entered():
-	$".".material=material_outline
+func on_mouse_select():
+	self.material=material_outline
 	pass # Replace with function body.
 
 
-func _on_Texture_mouse_exited():
-	$".".material=null
+func on_mouse_unselect():
+	self.material=null
 	pass # Replace with function body.
+
+
