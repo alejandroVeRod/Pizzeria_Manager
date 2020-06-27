@@ -1,7 +1,8 @@
-extends Control
+extends Area2D
+
 
 var dragging=false
-signal is_dragged
+signal isDragged
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -10,17 +11,18 @@ func set_dragging():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$".".connect("gui_input",self,"input_event")
-	self.connect("is_dragged",self,"set_dragging")
+	self.connect("input_event",self,"input_event")
 	pass # Replace with function body.
 
-func input_event(event):
+func input_event(viewport,event,shape):
 
 	if event is InputEventMouseButton:
 		if event.button_index==BUTTON_LEFT and event.pressed:
-			emit_signal("is_dragged")
+			set_dragging()
+			emit_signal("isDragged",dragging)
 		elif event.button_index==BUTTON_LEFT and !event.pressed:
-			emit_signal("is_dragged")
+			set_dragging()
+			emit_signal("isDragged",dragging)
 			pass
 
 	pass
@@ -29,5 +31,5 @@ func input_event(event):
 func _process(delta):
 	if dragging:
 		var mouse_pos=get_viewport().get_mouse_position()
-		$".".set_position(Vector2(mouse_pos.x,mouse_pos.y))
+		self.set_position(Vector2(mouse_pos.x,mouse_pos.y))
 	pass
