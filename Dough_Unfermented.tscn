@@ -6,21 +6,22 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/outLineSize = 0.021
-shader_param/outLineColor = Plane( 1, 0.768, 0.364, 0.494 )
+shader_param/outLineSize = 0.02
+shader_param/outLineColor = Plane( 1, 1, 1, 1 )
 
 [node name="Dough_Unfermented" type="Control"]
-anchor_right = 0.049
-anchor_bottom = 0.073
-margin_right = -0.176003
-margin_bottom = 0.199997
+margin_left = 160.0
+margin_top = 117.0
+margin_right = 189.0
+margin_bottom = 145.0
+hint_tooltip = "Dough Fermenting"
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 26.4547, 20.6485 )
-scale = Vector2( 1.15964, 1.08514 )
+position = Vector2( 15.7069, 12.1834 )
+scale = Vector2( 1.13158, 1.09868 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
