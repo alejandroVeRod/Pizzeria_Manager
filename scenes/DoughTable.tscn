@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://ShowValueSlider.gd" type="Script" id=1]
 [ext_resource path="res://resources/scripts/ProgressBar_on_timer.gd" type="Script" id=2]
 [ext_resource path="res://resources/images/jar water.png" type="Texture" id=4]
 [ext_resource path="res://resources/images/yeast.png" type="Texture" id=5]
 [ext_resource path="res://resources/fonts/PIXELADE.TTF" type="DynamicFontData" id=6]
-[ext_resource path="res://resources/images/tableta.png" type="Texture" id=7]
 [ext_resource path="res://resources/images/salt.png" type="Texture" id=8]
 [ext_resource path="res://resources/images/Flour.png" type="Texture" id=9]
 [ext_resource path="res://resources/scripts/Dialog_Dough_Preparation.gd" type="Script" id=11]
@@ -47,10 +46,7 @@ font_data = SubResource( 8 )
 size = 12
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 26.7234, 10 )
-
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=11]
 script/source = "extends PopupMenu
 
 
@@ -69,21 +65,17 @@ func _ready():
 #	pass
 "
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=12]
 size = 19
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[node name="Dough_Table" type="Control"]
-margin_left = 454.0
-margin_top = 262.0
-margin_right = 568.0
-margin_bottom = 344.0
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 41.5195, 24.9314 )
+
+[node name="Dough_Table" type="Area2D"]
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 visible = false
@@ -208,6 +200,8 @@ margin_bottom = 24.0
 text = "1"
 align = 1
 max_length = 2
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="HWaterContainer" type="HBoxContainer" parent="AcceptDialog/MarginContainer/VBoxContainer"]
 margin_top = 76.0
@@ -421,27 +415,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OutlineSprite" type="Sprite" parent="."]
-scale = Vector2( 1.67386, 1.65787 )
-texture = ExtResource( 7 )
-centered = false
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="OutlineSprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OutlineSprite/StaticBody2D"]
-position = Vector2( 30.2436, 30.5352 )
-shape = SubResource( 14 )
-one_way_collision = true
-
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_left = 33.0
 margin_top = -31.0
 margin_right = 154.0
 margin_bottom = 14.0
-script = SubResource( 12 )
+script = SubResource( 11 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu"]
 margin_right = 40.0
@@ -463,7 +442,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 111.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 text = "Prepare Dough"
 
 [node name="Panel_cancel" type="PanelContainer" parent="PopupMenu/VBoxContainer"]
@@ -480,8 +459,31 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 111.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 text = "Cancel Dough Preparation"
 
 [node name="DoughPosition" type="Node2D" parent="."]
 position = Vector2( 49.4001, 25.6501 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 13 )
+one_way_collision = true
+
+[node name="Popup" type="Popup" parent="."]
+visible = true
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Popup"]
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Popup/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 86.0
+margin_bottom = 21.0
+text = "Dough Table"

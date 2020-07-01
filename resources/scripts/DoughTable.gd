@@ -1,4 +1,4 @@
-extends Control
+extends Area2D
 onready var progress_bar=$ProgressBar
 onready var accept_dialog=$AcceptDialog
 onready var dough_unfermented=preload("res://Dough_Unfermented.tscn")
@@ -33,15 +33,12 @@ func dough_finished():
 	idle=true
 	preparing_dough=false
 	dough_on_table=true
-	print("finished")
 	var new_dough_unfermented= load("res://Dough_Unfermented.tscn")
 
 	var dough_instance=new_dough_unfermented.instance()
 	self.add_child(dough_instance)
 	dough_instance.visible=true
-
-
-	
+	dough_instance.position = $DoughPosition.position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,12 +49,12 @@ func _ready():
 	accept_dialog.connect("confirmed",self,"prepare_dough")
 	$PopupMenu/VBoxContainer/Panel_prepare/Button_prepare.connect("button_down",self,"prepare_dough")
 	$PopupMenu/VBoxContainer/Panel_cancel/Button_cancel.connect("button_down",self,"cancel_preparation")
-	$".".connect("gui_input",self,"_on_input_event")
+	$".".connect("input_event",self,"_on_input_event")
 	progress_bar.connect("on_finished",self,"dough_finished")
 	pass # Replace with function body.
 
 
-func _on_input_event(event):
+func _on_input_event(viewport,event,shape):
 	if event is InputEventMouseButton:
 		if event.button_index==BUTTON_LEFT and event.pressed:
 			$PopupMenu.popup()
